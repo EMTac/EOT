@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EarthPorn Over Time</title>
+        <meta charset='utf-8' />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+            integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+            crossorigin=""/>
+
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="..." crossorigin="anonymous">
+        
+        <link rel="stylesheet" href="styles.css"/>
+        <script src="output.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <button id="showAllPostsButton"><b>Show All Posts</b></button>
+            <div id='map'></div>
+            <div id="selectedTimeBox"></div>
+            <input type="range" id="dateSlider" min="1672531201000" max="1682985601000" step="86400000">
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+        </div>
+        <script src="scripts.js"></script>
+    </body>
+</html>
