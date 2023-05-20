@@ -16,6 +16,16 @@ const map = L.map('map', {
 map.fitWorld();
 map.setView([0, 0], 2);
 
+var icon2 = L.icon({
+  iconUrl: 'icon2.png',
+  iconSize: [32, 32],
+});
+
+var icon3 = L.icon({
+  iconUrl: 'icon3.png',
+  iconSize: [32, 32],
+});
+
 var originalMarkers = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
       var sum = 0;
@@ -69,14 +79,14 @@ var originalMarkers = L.markerClusterGroup({
     var minFontSize = 20;
     var maxFontSize = 100;
 
-    const fontSize = ((score - minScore) / (maxScore - minScore)) * (maxFontSize - minFontSize) + minFontSize;
+    const fontSize = ((score - minScore) / (maxScore - minScore)) * (maxFontSize - minFontSize) + minFontSize ;
     var iconAnchorX = fontSize / 2;
     var iconAnchorY = fontSize / 2;
 
 
     var redArrowIcon = L.divIcon({
       className: 'custom-icon',
-      html: '<img src="customIcon.png" width="' + fontSize + '" height="' + fontSize + '">',
+      html: '<img src="picIcon.png" width="' + fontSize*1.2 + '" height="' + fontSize + '">',
       iconAnchor: [iconAnchorX, iconAnchorY]
     });
     
@@ -88,7 +98,7 @@ var originalMarkers = L.markerClusterGroup({
     });
     var score2 = parseFloat(score)
     var formattedUpvote = score2.toLocaleString(undefined, { maximumFractionDigits: 2 })
-    marker.bindPopup("<b>" +title + '</b>' + '<hr>' + "Posted on: "+ formattedDate +"<br>" + '<img src="customIcon2.png" width="' + fontSize + '" height="' + fontSize + '">'+" "+"<b>"+formattedUpvote + "</b> upvotes");
+    marker.bindPopup("<img src=https://i.redd.it/5zpy6v5i58xa1.jpg width=305px height=auto>"+"</br>"+"</br>"+"<b>" +title + '</b>' + '<hr>' + "Posted on: "+ formattedDate +"<br>" + '<img src="customIcon2.png" width="30px" height="30px">'+" "+"<b>"+formattedUpvote + "</b> upvotes");
     marker.on('popupopen', function (e) {
       var popup = e.popup;
       popup.getElement().classList.add('custom-popup');
@@ -137,9 +147,9 @@ var originalMarkers = L.markerClusterGroup({
   dateSlider.addEventListener('input', function () {
     var selectedTimestamp = parseInt(dateSlider.value);
     var selectedDate = new Date(selectedTimestamp);
-    var formattedTime = selectedDate.toLocaleString();
+    var formattedDate = selectedDate.toLocaleString();
   
-    selectedTimeBox.textContent = formattedTime;
+    selectedTimeBox.innerHTML = "<b>" + formattedDate + "</b>";
     filterMarkersByDate(selectedTimestamp);
   });
 
@@ -147,14 +157,25 @@ var originalMarkers = L.markerClusterGroup({
 showAllPostsButton.addEventListener('click', showAllPosts);
 
 function showAllPosts() {
+  stopAnimation();
   map.removeLayer(filteredMarkers);
 
+  map.removeLayer(originalMarkers);
+
+  originalMarkers.eachLayer(function (marker) {
+    marker.setOpacity(1);
+  });
+
   map.addLayer(originalMarkers);
+
+  selectedTimeBox.style.display = "none";
+  legendContainer2.style.display = "none";
 }
 
 var dateSlider = document.getElementById('dateSlider');
 var playButton = document.getElementById('playButton');
 var pauseButton = document.getElementById('pauseButton');
+var replayButton = document.getElementById('replayButton');
 var selectedTimeBox = document.getElementById('selectedTimeBox');
 
 var animationInterval;
@@ -162,11 +183,24 @@ var animationActive = false;
 
 playButton.addEventListener('click', startAnimation);
 pauseButton.addEventListener('click', stopAnimation);
+replayButton.addEventListener('click', replayAnimation);
 dateSlider.addEventListener('input', handleSliderInteraction);
+
+function replayAnimation() {
+  if (animationActive) {
+    stopAnimation();
+  }
+
+  dateSlider.value = dateSlider.min;
+  startAnimation();
+}
 
 function startAnimation() {
   if (animationActive) return;
-
+  playButton.style.display = "none";
+  pauseButton.style.display = "block";
+  selectedTimeBox.style.display = "block";
+  legendContainer2.style.display = "block";
   var minValue = parseInt(dateSlider.min);
   var maxValue = parseInt(dateSlider.max);
   var stepValue = parseInt(dateSlider.step);
@@ -184,15 +218,16 @@ function startAnimation() {
     dateSlider.value = currentValue;
 
     var selectedDate = new Date(currentValue);
-    var formattedTime = selectedDate.toLocaleString();
-    selectedTimeBox.textContent = formattedTime;
+    var formattedDate = selectedDate.toLocaleDateString();
+    selectedTimeBox.innerHTML = "<b>" + formattedDate + "</b>";
     filterMarkersByDate(currentValue);
   }, 200);
 }
 
 function stopAnimation() {
   if (!animationActive) return;
-
+  playButton.style.display = "block";
+  pauseButton.style.display = "none";
   clearInterval(animationInterval);
   animationActive = false;
 }
@@ -201,12 +236,140 @@ function handleSliderInteraction() {
   if (animationActive) {
     stopAnimation();
   }
-
+  legendContainer2.style.display = "block";
   var selectedTimestamp = parseInt(dateSlider.value);
   var selectedDate = new Date(selectedTimestamp);
-  var formattedTime = selectedDate.toLocaleString();
+  var formattedDate = selectedDate.toLocaleDateString();
 
-  selectedTimeBox.textContent = formattedTime;
+  selectedTimeBox.innerHTML = "<b>" + formattedDate + "</b>";
+  selectedTimeBox.style.display = "block";
   filterMarkersByDate(selectedTimestamp);
+}
+
+var legend = L.control.Legend({
+  position: "bottomleft",
+  title: "Geocoded Posts",
+  fillColor: "#000",
+  opacity: 0.8,
+  legends: [
+    {
+      label: "Fewer Upvotes",
+      type: "image",
+      layers: filteredMarkers,
+      url: "picIcon.png",
+      fillOpacity: "0.5",
+    },
+    {
+      label: "More Upvotes",
+      type: "image",
+      layers: filteredMarkers,
+      url: "picIcon.png",
+      fillOpacity: "0.5",
+    },
+]
+}).addTo(map);
+
+var legendContainer = legend.getContainer();
+  legendContainer.style.backgroundColor = '#111111';
+  legendContainer.style.opacity = 0.8;
+  legendContainer.style.bottom = "60px";
+  legendContainer.style.color = "white";
+  legendContainer.style.width = "200px";
+  legendContainer.style.height = "150px";
+  legendContainer.style.border = "2px solid rgb(185, 13, 13)";
+
+
+var legendLabels = legendContainer.querySelectorAll(".leaflet-legend-item");
+legendLabels.forEach(function (label) {
+  label.classList.add("non-interactive-label");
+  label.style.marginBottom = "30px";
+});
+
+var legendImgs = legendContainer.querySelectorAll(".leaflet-legend-item img");
+var firstLegendImg = legendImgs[1];
+firstLegendImg.style.height = "50px";
+firstLegendImg.style.width = "auto";
+
+var legendText = legendContainer.querySelectorAll(".leaflet-legend-item span");
+var firstLegendText = legendText[1];
+firstLegendText.style.paddingLeft = "20px";
+
+var legendColumns = legendContainer.querySelector(".leaflet-legend-column");
+
+legendColumns.style.marginLeft = "20px";
+
+var legend2 = L.control.Legend({
+  position: "bottomright",
+  title: "Post Timeline",
+  fillColor: "#000",
+  opacity: 0.8,
+  legends: [
+    {
+      label: "Current Date",
+      type: "image",
+      layers: filteredMarkers,
+      url: "picIcon.png",
+      fillOpacity: "0.5",
+    },
+    {
+      label: "One Day Prior",
+      type: "image",
+      layers: filteredMarkers,
+      url: "picIcon.png",
+      fillOpacity: "0.5",
+    },
+    {
+      label: "Two Days Prior",
+      type: "image",
+      layers: filteredMarkers,
+      url: "picIcon.png",
+      fillOpacity: "0.5",
+    },
+]
+}).addTo(map);
+
+var legendContainer2 = legend2.getContainer();
+  legendContainer2.style.backgroundColor = '#111111';
+  legendContainer2.style.opacity = 0.8;
+  legendContainer2.style.bottom = "50px";
+  legendContainer2.style.color = "white";
+  legendContainer2.style.width = "200px";
+  legendContainer2.style.height = "150px";
+  legendContainer2.style.display = "none";
+  legendContainer2.style.border = "2px solid rgb(185, 13, 13)";
+
+  var legendLabels2 = legendContainer2.querySelectorAll(".leaflet-legend-item");
+  legendLabels2.forEach(function (label) {
+    label.classList.add("non-interactive-label");
+    label.style.marginBottom = "10px";
+  });
+
+  var legendImgs2 = legendContainer2.querySelectorAll(".leaflet-legend-item img");
+    var firstLegendImg1 = legendImgs2[0]
+    firstLegendImg1.style.marginLeft = "10px";
+    firstLegendImg1.style.marginTop = "10px";
+    var firstLegendImg2 = legendImgs2[1];
+    firstLegendImg2.style.opacity = 0.7
+    firstLegendImg2.style.marginLeft = "10px";
+    firstLegendImg2.style.marginTop = "10px";
+    var firstLegendImg3 = legendImgs2[2];
+    firstLegendImg3.style.opacity = 0.4
+    firstLegendImg3.style.marginLeft = "10px";
+    firstLegendImg3.style.marginTop = "10px";
+
+function toggleAboutContainer() {
+  var aboutContainer = document.getElementById("aboutContainer");
+  var contentContainer = document.getElementById("contentContainer");
+  var caret = document.getElementById("collapseButton").querySelector(".fa-caret-up");
+      
+  if (aboutContainer.style.width === "20%") {
+    aboutContainer.style.width = "0";
+    contentContainer.style.width = "100%";
+    caret.style.transform = "rotate(90deg)"
+  } else {
+    aboutContainer.style.width = "20%";
+    contentContainer.style.width = "80%";
+    caret.style.transform = "rotate(270deg)"
+  }
 }
   
