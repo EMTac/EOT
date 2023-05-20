@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="icon" href="customIcon.png" type="image/x-icon">
+        <link rel="shortcut icon" href="customIcon.png" type="image/x-icon">
         <title>EarthPorn Over Time</title>
         <meta charset='utf-8' />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -16,6 +18,9 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+        <link rel="stylesheet" href="leaflet.legend.css"/>
+        <script src="leaflet.legend.js"></script>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="..." crossorigin="anonymous">
         
         <link rel="stylesheet" href="styles.css"/>
@@ -23,12 +28,26 @@
     </head>
     <body>
         <div id="container">
-            <button id="showAllPostsButton"><b>Show All Posts</b></button>
-            <div id='map'></div>
-            <div id="selectedTimeBox"></div>
-            <input type="range" id="dateSlider" min="1672531201000" max="1682985601000" step="86400000">
-            <button id="playButton">Play</button>
-            <button id="pauseButton">Pause</button>
+            <div id="aboutContainer">
+                <div class="imageContainer">
+                    <img src="aboutImg.jpg">
+                    <h1>r/EarthPorn Posts, January - April, 2023</h1>
+                    <p><a href="https://www.reddit.com/r/EarthPorn/" target="_blank">r/EarthPorn</a> is a reddit community devoted to sharing photos of natural landscapes devoid of human infrastructure. Conveniently for this mapping project, all posts must include location information in their titles, allowing them to be geocoded, or converted from text to coordinates via an API like the Google Maps Geocoder used here. This allows for an interesting analysis of where these posts come from, i.e. where reddit users and outdoor enthusiasts overlap.</p><br><p>Importantly, posts that garnered fewer than <span class="highlighted-text">2 likes</span> were excluded from the geocoding process to weed out spam and duplicate posts. This left exactly 5,556 posts between January 1st and May 1st, 2023, represented here as pixelated cameras. It is equally important to note that the <span class="highlighted-text">locations shown here are only as accurate as the post titles allowed them to be</span>. While r/EarthPorn requires location information, there is no standardized format to report this information. A post from the Kautz Glacier on Mt Rainier may be titled Kautz Glacier, Mt Rainier National Park, or even Washington State. Posts without any identifiable location, like "Beautiful Glacier View", were not geocoded. However, posts titled with a state or region name are still present on the map, represented at the center of that region, not necessarily photographer's true location. For this reason, many posts were assigned to identical locations at popular destinations like Mount Rainier NP. These can be easily viewed in the aggregate map.</p><br><p>To interact with the aggregate map, you can zoom in or select a cluster to view the posts inside, then select an individual post to see relevant data or view the post on reddit. To visualize the post locations over time, you can interact with the timeline controls at the bottom of the map. Select <span class="highlighted-text">"Show All Posts"</span> to return to the aggregate map at any point.</p>
+                </div>
+            </div>
+            <div id="contentContainer">
+                <button id="collapseButton" onclick="toggleAboutContainer()"><i class="fa-solid fa-caret-up"></i></button>
+                <button id="showAllPostsButton"><b>Show All Posts</b></button>
+                <div id='map'>
+                </div>
+                <div id="selectedTimeBox"></div>
+                <button id="playButton"><i class="fa-solid fa-play"></i></button>
+                <button id="pauseButton"><i class="fa-solid fa-pause"></i></button>
+                <div id="sliderContainer">
+                    <input type="range" id="dateSlider" min="1672531201000" max="1682985601000" step="86400000">
+                </div> 
+                <button id="replayButton"><i class="fa-solid fa-arrow-rotate-left"></i></button>         
+            </div>
         </div>
         <script src="scripts.js"></script>
     </body>
