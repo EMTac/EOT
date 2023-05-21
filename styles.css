@@ -17,7 +17,6 @@ html, body {
     align-items: center;
     height: 100%;
     overflow: auto;
-    width:20%;
     background-color: rgb(26, 26, 26);
     border: 2px solid #9c1515;
     z-index: 1000;
@@ -68,12 +67,26 @@ html, body {
   .highlighted-text {
     color: rgb(255, 46, 46);
   }
+
+  #closeButton {
+    top:30px;
+    right: 10px;
+    background-color: rgb(49, 49, 49);
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: transparent;
+    padding: 10px;
+    z-index: 3;
+    position:absolute;
+    width: 35px;
+    height: auto;
+    transform: translateY(-50%);
+  }
   
   #contentContainer {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 80%;
     right: 0;
     position: absolute;
     z-index:999;
@@ -199,8 +212,8 @@ html, body {
 
 .leaflet-popup-content-wrapper {
   color: #fff;
-  background-color: rgb(136, 37, 37);
-  border: 2px solid #ffffff;
+  background-color: rgb(26, 26, 26);
+  border: 2px solid #9c1515;
   border-radius: 0;
 }
 
