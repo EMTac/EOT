@@ -16,15 +16,29 @@ const map = L.map('map', {
 map.fitWorld();
 map.setView([0, 0], 2);
 
-var icon2 = L.icon({
-  iconUrl: 'icon2.png',
-  iconSize: [32, 32],
-});
+function updateContainerWidths() {
+  var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+  var aboutContainer = document.getElementById("aboutContainer");
+  var contentContainer = document.getElementById("contentContainer");
 
-var icon3 = L.icon({
-  iconUrl: 'icon3.png',
-  iconSize: [32, 32],
-});
+  if (!isAboutContainerCollapsed) {
+    if (viewportWidth <= 1200 && viewportWidth > 768) {
+      aboutContainer.style.width = "40%";
+      contentContainer.style.width = "60%";
+    } else if (viewportWidth <= 768) {
+      aboutContainer.style.width = "100%";
+      contentContainer.style.width = "auto";
+    } else {
+      aboutContainer.style.width = "20%";
+      contentContainer.style.width = "80%";
+    }
+  }
+
+  map.invalidateSize();
+}
+
+window.addEventListener("load", updateContainerWidths);
+window.addEventListener("resize", updateContainerWidths);
 
 var originalMarkers = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
@@ -68,8 +82,10 @@ var originalMarkers = L.markerClusterGroup({
   landscapePts.features.forEach(feature => {
     var coordinates = feature.geometry.coordinates;
     var properties = feature.properties;
-    var title = properties['\ufefftitle'];
+    var title = properties['title'];
     var score = properties.score;
+    var img = properties.url;
+    var link = properties.link;
     var timestamp = feature.properties.time;
     var date = new Date(timestamp * 1000);
     var formattedDate = date.toLocaleString();
@@ -94,11 +110,24 @@ var originalMarkers = L.markerClusterGroup({
       title: title,
       time: formattedDate,
       score: score,
+      img: img,
+      link: link,
       icon: redArrowIcon
     });
     var score2 = parseFloat(score)
     var formattedUpvote = score2.toLocaleString(undefined, { maximumFractionDigits: 2 })
-    marker.bindPopup("<img src=https://i.redd.it/5zpy6v5i58xa1.jpg width=305px height=auto>"+"</br>"+"</br>"+"<b>" +title + '</b>' + '<hr>' + "Posted on: "+ formattedDate +"<br>" + '<img src="customIcon2.png" width="30px" height="30px">'+" "+"<b>"+formattedUpvote + "</b> upvotes");
+    
+    var popupContent;
+
+    if (img === "") {
+      popupContent = "<img src='noImg.png' width='80px' height='auto'><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
+    } else {
+      popupContent = "<img src='" + img + "' width='305px' height='auto' onerror=\"this.src='noImg.png'; this.width=80\"><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
+    }
+
+    marker.bindPopup(popupContent);
+
+    marker.bindPopup(popupContent);
     marker.on('popupopen', function (e) {
       var popup = e.popup;
       popup.getElement().classList.add('custom-popup');
@@ -357,19 +386,35 @@ var legendContainer2 = legend2.getContainer();
     firstLegendImg3.style.marginLeft = "10px";
     firstLegendImg3.style.marginTop = "10px";
 
-function toggleAboutContainer() {
-  var aboutContainer = document.getElementById("aboutContainer");
-  var contentContainer = document.getElementById("contentContainer");
-  var caret = document.getElementById("collapseButton").querySelector(".fa-caret-up");
-      
-  if (aboutContainer.style.width === "20%") {
-    aboutContainer.style.width = "0";
-    contentContainer.style.width = "100%";
-    caret.style.transform = "rotate(90deg)"
-  } else {
-    aboutContainer.style.width = "20%";
-    contentContainer.style.width = "80%";
-    caret.style.transform = "rotate(270deg)"
-  }
-}
-  
+    var isAboutContainerCollapsed = false;
+
+    function toggleAboutContainer() {
+      var aboutContainer = document.getElementById("aboutContainer");
+      var contentContainer = document.getElementById("contentContainer");
+      var caret = document.getElementById("collapseButton").querySelector(".fa-caret-up");
+          
+      if (!isAboutContainerCollapsed) {
+        aboutContainer.style.width = "0";
+        contentContainer.style.width = "100%";
+        caret.style.transform = "rotate(90deg)";
+        isAboutContainerCollapsed = true;
+      } else {
+        var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        var aboutContainer = document.getElementById("aboutContainer");
+        var contentContainer = document.getElementById("contentContainer");
+        if (viewportWidth <= 1200 && viewportWidth > 768) {
+          aboutContainer.style.width = "40%";
+          contentContainer.style.width = "60%";
+        } else if (viewportWidth <= 768) {
+          aboutContainer.style.width = "100%";
+          contentContainer.style.width = "auto";
+        } else {
+          aboutContainer.style.width = "20%";
+          contentContainer.style.width = "80%";
+        };
+        caret.style.transform = "rotate(270deg)";
+        isAboutContainerCollapsed = false;
+      }
+      map.invalidateSize();
+    }
