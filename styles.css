@@ -1,3 +1,81 @@
+@media only screen and (max-width: 915px) {
+  #collapseButton {
+    width:50px;
+    height: 80px;
+    font-size: 26px;
+  }
+  #showAllPostsButton {
+    width: 180px;
+    height: 50px;
+    font-size: 20px;
+  }
+  #playButton,
+  #pauseButton,
+  #replayButton {
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    bottom: 0;
+  }
+  #dateSlider {
+    width: 65%;
+  }
+  #dateSlider {
+    --track-height: 13px;
+    --track-color: white;
+    --played-track-color: red;
+    --thumb-color: rgb(255, 0, 0);
+    --thumb-border-color: white;
+    --thumb-border-width: 2px;
+    --thumb-scale: 1.7;
+  }
+  #sliderContainer {
+    bottom: 20px;
+  }
+  #selectedTimeBox {
+    top: 5%;
+  }
+  .imageContainer h1 {
+    font-size: 40px;
+  }
+  .imageContainer p {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 915px) {
+  #playButton, 
+  #pauseButton,
+  #replayButton {
+    width: 35px;
+    height: 35px;
+    bottom: 10px;
+  }
+  #collapseButton {
+    width: 40px;
+    height: 60px;
+    font-size: 16px;
+  }
+  #dateSlider {
+    width: 100%;
+  }
+  #dateSlider {
+    --track-height: 10px;
+    --track-color: white;
+    --played-track-color: red;
+    --thumb-color: rgb(255, 0, 0);
+    --thumb-border-color: white;
+    --thumb-border-width: 2px;
+    --thumb-scale: 1.4;
+  }
+  #sliderContainer {
+    bottom: 10px;
+  }
+  #selectedTimeBox {
+    top: 2%;
+  }
+}
+
 html, body {
     height: 100%;
     margin: 0;
@@ -291,7 +369,6 @@ html, body {
   padding: 10px;
   width:auto;
   height: 60px;
-  top: 2%;
   border-radius: 5%;
   right: 50%;
   transform: translateX(50%);
@@ -305,17 +382,16 @@ html, body {
   display: flex;
   height: 5%;
   align-items: center;
+  justify-content: center;
   position: absolute;
   width: 96%;
   left: 2%;
-  bottom: 10px;
   z-index: 2;
 }
 
 #playButton,
 #pauseButton {
   left:15px;
-  bottom: 10px;
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
   border-radius: 50%;
@@ -323,8 +399,6 @@ html, body {
   padding: 10px;
   z-index: 3;
   position:absolute;
-  width: 35px;
-  height: auto;
   transform: translateY(-50%);
 }
 
@@ -351,7 +425,6 @@ html, body {
 }
 
 #replayButton {
-  bottom: 10px;
   right: 15px;
   background-color: rgb(255, 0, 0);
   color: rgb(255, 255, 255);
@@ -360,26 +433,13 @@ html, body {
   padding: 10px;
   z-index: 1000;
   position:absolute;
-  width: 35px;
-  height: auto;
   transform: translateY(-50%);
 }
 
 #dateSlider {
-  width: 100%;
   background-color: transparent;
   margin-left: 45px;
   margin-right: 45px;
-}
-
-#dateSlider {
-  --track-height: 6px;
-  --track-color: white;
-  --played-track-color: red;
-  --thumb-color: rgb(255, 0, 0);
-  --thumb-border-color: white;
-  --thumb-border-width: 2px;
-  --thumb-scale: 1.2;
 }
 
 #dateSlider::-moz-range-track {
