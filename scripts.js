@@ -50,7 +50,7 @@ window.addEventListener("resize", function() {
 function handleResize() {
   var minScore = 2;
   var maxScore = 38699;
-  var minFontSize = 30;
+  var minFontSize = 20;
   var maxFontSize = 100;
 
   if (window.innerWidth < 1080) {
