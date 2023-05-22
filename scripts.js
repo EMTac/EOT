@@ -37,8 +37,30 @@ function updateContainerWidths() {
   map.invalidateSize();
 }
 
-window.addEventListener("load", updateContainerWidths);
-window.addEventListener("resize", updateContainerWidths);
+function setLegendContainerBottom() {
+  var legendContainer = legend.getContainer();
+  console.log("hello")
+  var legendContainer2 = legend2.getContainer();
+  var screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+  if (screenWidth > 915) {
+    legendContainer.style.bottom = '60px';
+    legendContainer2.style.bottom = '45px';
+  } else {
+    legendContainer.style.bottom = '100px';
+    legendContainer2.style.bottom = '85px';
+  }
+}
+
+window.addEventListener("load", function() {
+  updateContainerWidths();
+  setLegendContainerBottom();
+});
+
+window.addEventListener("resize", function() {
+  updateContainerWidths();
+  setLegendContainerBottom();
+});
 
 var originalMarkers = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
@@ -301,7 +323,6 @@ var legend = L.control.Legend({
 var legendContainer = legend.getContainer();
   legendContainer.style.backgroundColor = '#111111';
   legendContainer.style.opacity = 0.8;
-  legendContainer.style.bottom = "60px";
   legendContainer.style.color = "white";
   legendContainer.style.width = "200px";
   legendContainer.style.height = "150px";
@@ -360,7 +381,6 @@ var legend2 = L.control.Legend({
 var legendContainer2 = legend2.getContainer();
   legendContainer2.style.backgroundColor = '#111111';
   legendContainer2.style.opacity = 0.8;
-  legendContainer2.style.bottom = "50px";
   legendContainer2.style.color = "white";
   legendContainer2.style.width = "200px";
   legendContainer2.style.height = "150px";
