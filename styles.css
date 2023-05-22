@@ -462,3 +462,7 @@ html, body {
 .non-interactive-label {
   pointer-events: none;
 }
+
+.leaflet-popup-content {
+  width: 500px !important;
+}
