@@ -39,11 +39,40 @@ function updateContainerWidths() {
 
 window.addEventListener("load", function() {
   updateContainerWidths();
+  handleResize();
 });
 
 window.addEventListener("resize", function() {
   updateContainerWidths();
+  handleResize();
 });
+
+function handleResize() {
+  var minScore = 2;
+  var maxScore = 38699;
+  var minFontSize = 30;
+  var maxFontSize = 100;
+
+  if (window.innerWidth < 1080) {
+    minFontSize = 40;
+    maxFontSize = 120;
+  }
+
+  originalMarkers.eachLayer(function (marker) {
+    var score = marker.options.score;
+    var fontSize = ((score - minScore) / (maxScore - minScore)) * (maxFontSize - minFontSize) + minFontSize;
+    var iconAnchorX = fontSize / 2;
+    var iconAnchorY = fontSize / 2;
+
+    marker.setIcon(L.divIcon({
+      className: 'custom-icon',
+      html: '<img src="picIcon.png" width="' + fontSize * 1.2 + '" height="' + fontSize + '">',
+      iconAnchor: [iconAnchorX, iconAnchorY]
+    }));
+  });
+
+  originalMarkers.refreshClusters();
+}
 
 var originalMarkers = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
@@ -62,10 +91,16 @@ var originalMarkers = L.markerClusterGroup({
         className = 'cluster-icon-high';
         }
 
+      var fontSizeLarge = 20;
+      var fontSizeSmall = 24;
+
+      var fontSize = window.innerWidth < 1080 ? fontSizeSmall : fontSizeLarge;
+
       var tempDiv = document.createElement('div');
         tempDiv.style.visibility = 'hidden';
         tempDiv.style.position = 'absolute';
         tempDiv.style.whiteSpace = 'nowrap';
+        tempDiv.style.fontSize = fontSize + 'px';
         tempDiv.innerHTML = formattedSum;
         document.body.appendChild(tempDiv);
 
@@ -97,8 +132,13 @@ var originalMarkers = L.markerClusterGroup({
 
     var minScore = 2;
     var maxScore = 38699;
-    var minFontSize = 20;
+    var minFontSize = 30;
     var maxFontSize = 100;
+
+    if (window.innerWidth < 1080) {
+      minFontSize = 40;
+      maxFontSize = 120;
+    }
 
     const fontSize = ((score - minScore) / (maxScore - minScore)) * (maxFontSize - minFontSize) + minFontSize ;
     var iconAnchorX = fontSize / 2;
@@ -422,20 +462,26 @@ var legendContainer2 = legend2.getContainer();
       map.invalidateSize();
     }
 
-    function panMapToBottom(popup) {
-      var latLng = popup.getLatLng();
-      
-      var mapContainer = map.getContainer();
-      var mapHeight = mapContainer.offsetHeight;
-      
-      var point = map.latLngToContainerPoint(latLng);
-      point.y -= mapHeight / 3.5;
-      var newLatLng = map.containerPointToLatLng(point);
-      
-      map.panTo(newLatLng);
-    }
-    
-    map.on('popupopen', function(event) {
-      var popup = event.popup;
-      panMapToBottom(popup);
-    });
+function panMapToBottom(popup) {
+  var latLng = popup.getLatLng();
+  
+  var mapContainer = map.getContainer();
+  var mapHeight = mapContainer.offsetHeight;
+  
+  var point = map.latLngToContainerPoint(latLng);
+  point.y -= mapHeight / 3.5;
+  var newLatLng = map.containerPointToLatLng(point);
+  
+  map.panTo(newLatLng);
+}
+
+map.on('popupopen', function(event) {
+  var popup = event.popup;
+  panMapToBottom(popup);
+
+  var contentNode = popup.getContent();
+  var imageElement = contentNode.querySelector('img');
+  if (imageElement) {
+    imageElement.style.userSelect = 'none';
+  }
+});
