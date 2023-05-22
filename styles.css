@@ -1,4 +1,4 @@
-@media only screen and (max-width: 915px) {
+@media only screen and (max-width: 1080px) {
   #collapseButton {
     width:50px;
     height: 80px;
@@ -43,7 +43,7 @@
   }
 }
 
-@media only screen and (min-width: 915px) {
+@media only screen and (min-width: 1081px) {
   #playButton, 
   #pauseButton,
   #replayButton {
@@ -84,6 +84,7 @@ html, body {
   #container {
     display:flex;
     position: relative;
+    overflow: hidden;
     height: 100%;
     width: 100%;
   }
