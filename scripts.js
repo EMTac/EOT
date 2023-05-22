@@ -127,7 +127,7 @@ var originalMarkers = L.markerClusterGroup({
     if (img === "") {
       popupContent = "<img src='noImg.png' width='80px' height='auto'><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
     } else {
-      popupContent = "<a href='" + img + "' target='_blank'><img src='" + img + "' width='305px' height='auto' onerror=\"this.src='noImg.png'; this.width=80\"></a><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
+      popupContent = "<a href='" + img + "' target='_blank'><img src='" + img + "' width='505px' height='auto' onerror=\"this.src='noImg.png'; this.width=80\"></a><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
     }
 
     marker.bindPopup(popupContent);
@@ -308,7 +308,7 @@ var legendContainer = legend.getContainer();
   legendContainer.style.opacity = 0.8;
   legendContainer.style.color = "white";
   legendContainer.style.width = "200px";
-  legendContainer.style.bottom = "100px";
+  legendContainer.style.bottom = "85px";
   legendContainer.style.height = "150px";
   legendContainer.style.border = "2px solid rgb(185, 13, 13)";
 
@@ -367,7 +367,7 @@ var legendContainer2 = legend2.getContainer();
   legendContainer2.style.opacity = 0.8;
   legendContainer2.style.color = "white";
   legendContainer2.style.width = "200px";
-  legendContainer2.style.bottom = "86px";
+  legendContainer2.style.bottom = "71px";
   legendContainer2.style.height = "150px";
   legendContainer2.style.display = "none";
   legendContainer2.style.border = "2px solid rgb(185, 13, 13)";
