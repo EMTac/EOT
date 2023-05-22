@@ -479,9 +479,7 @@ map.on('popupopen', function(event) {
   var popup = event.popup;
   panMapToBottom(popup);
 
-  var contentNode = popup.getContent();
-  var imageElement = contentNode.querySelector('img');
-  if (imageElement) {
-    imageElement.style.userSelect = 'none';
-  }
+  popup._source.once('click', function(e) {
+    L.DomEvent.stopPropagation(e);
+  });
 });
