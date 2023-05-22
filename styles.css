@@ -11,12 +11,17 @@
   }
   #playButton,
   #pauseButton,
-  #replayButton,
-  #closeButton {
+  #replayButton {
     width: 60px;
     height: 60px;
     font-size: 25px;
     bottom: 0;
+  }
+  #closeButton {
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    top: 40px
   }
   #dateSlider {
     width: 65%;
@@ -49,16 +54,23 @@
   .leaflet-popup-content a {
     font-size: 22px
   }
+  .cluster-icon-text {
+    font-size: 20px
+  }
 }
 
 @media only screen and (min-width: 1081px) {
   #playButton, 
   #pauseButton,
-  #replayButton,
-  #closeButton {
+  #replayButton {
     width: 45px;
     height: 45px;
     bottom: 10px;
+  }
+  #closeButton {
+    width: 45px;
+    height: 45px;
+    top: 30px
   }
   #collapseButton {
     width: 40px;
@@ -88,6 +100,9 @@
   }
   
   .leaflet-popup-content a {
+    font-size: 16px
+  }
+  .cluster-icon-text {
     font-size: 16px
   }
 }
@@ -164,7 +179,6 @@ html, body {
   }
 
   #closeButton {
-    top:30px;
     right: 10px;
     background-color: rgb(49, 49, 49);
     color: rgb(255, 255, 255);
