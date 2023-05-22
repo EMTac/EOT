@@ -47,8 +47,8 @@
   #playButton, 
   #pauseButton,
   #replayButton {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     bottom: 10px;
   }
   #collapseButton {
@@ -69,7 +69,7 @@
     --thumb-scale: 1.4;
   }
   #sliderContainer {
-    bottom: 10px;
+    bottom: 15px;
   }
   #selectedTimeBox {
     top: 2%;
