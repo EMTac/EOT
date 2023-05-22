@@ -308,7 +308,7 @@ var legendContainer = legend.getContainer();
   legendContainer.style.opacity = 0.8;
   legendContainer.style.color = "white";
   legendContainer.style.width = "200px";
-  legendContainer.style.bottom = "85px";
+  legendContainer.style.bottom = "100px";
   legendContainer.style.height = "150px";
   legendContainer.style.border = "2px solid rgb(185, 13, 13)";
 
@@ -367,7 +367,7 @@ var legendContainer2 = legend2.getContainer();
   legendContainer2.style.opacity = 0.8;
   legendContainer2.style.color = "white";
   legendContainer2.style.width = "200px";
-  legendContainer2.style.bottom = "71px";
+  legendContainer2.style.bottom = "86px";
   legendContainer2.style.height = "150px";
   legendContainer2.style.display = "none";
   legendContainer2.style.border = "2px solid rgb(185, 13, 13)";
