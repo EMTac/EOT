@@ -494,10 +494,5 @@ style.innerHTML = `
   -ms-user-select: none;
   user-select: none;
 }
-@media only screen and (max-width: 1080px) {
-  .custom-popup img {
-    pointer-events: none;
-  }
-}
 `;
 document.getElementsByTagName('head')[0].appendChild(style);
