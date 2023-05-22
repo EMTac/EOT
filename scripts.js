@@ -45,10 +45,10 @@ function setLegendContainerBottom() {
 
   if (screenWidth > 915) {
     legendContainer.style.bottom = '60px';
-    legendContainer2.style.bottom = '45px';
+    legendContainer2.style.bottom = '46px';
   } else {
-    legendContainer.style.bottom = '100px';
-    legendContainer2.style.bottom = '85px';
+    legendContainer.style.bottom = '85px';
+    legendContainer2.style.bottom = '71px';
   }
 }
 
