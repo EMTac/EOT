@@ -131,8 +131,6 @@ var originalMarkers = L.markerClusterGroup({
     }
 
     marker.bindPopup(popupContent);
-
-    marker.bindPopup(popupContent);
     marker.on('popupopen', function (e) {
       var popup = e.popup;
       popup.getElement().classList.add('custom-popup');
@@ -423,3 +421,21 @@ var legendContainer2 = legend2.getContainer();
       }
       map.invalidateSize();
     }
+
+    function panMapToBottom(popup) {
+      var latLng = popup.getLatLng();
+      
+      var mapContainer = map.getContainer();
+      var mapHeight = mapContainer.offsetHeight;
+      
+      var point = map.latLngToContainerPoint(latLng);
+      point.y -= mapHeight / 3.5;
+      var newLatLng = map.containerPointToLatLng(point);
+      
+      map.panTo(newLatLng);
+    }
+    
+    map.on('popupopen', function(event) {
+      var popup = event.popup;
+      panMapToBottom(popup);
+    });
