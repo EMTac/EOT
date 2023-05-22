@@ -11,7 +11,8 @@
   }
   #playButton,
   #pauseButton,
-  #replayButton {
+  #replayButton,
+  #closeButton {
     width: 60px;
     height: 60px;
     font-size: 25px;
@@ -41,12 +42,20 @@
   .imageContainer p {
     font-size: 20px;
   }
+  .leaflet-popup-content {
+    font-size: 20px
+  }
+  
+  .leaflet-popup-content a {
+    font-size: 22px
+  }
 }
 
 @media only screen and (min-width: 1081px) {
   #playButton, 
   #pauseButton,
-  #replayButton {
+  #replayButton,
+  #closeButton {
     width: 45px;
     height: 45px;
     bottom: 10px;
@@ -73,6 +82,13 @@
   }
   #selectedTimeBox {
     top: 2%;
+  }
+  .leaflet-popup-content {
+    font-size: 14px
+  }
+  
+  .leaflet-popup-content a {
+    font-size: 16px
   }
 }
 
@@ -157,8 +173,6 @@ html, body {
     padding: 10px;
     z-index: 3;
     position:absolute;
-    width: 35px;
-    height: auto;
     transform: translateY(-50%);
   }
   
@@ -413,7 +427,8 @@ html, body {
 
 #playButton:hover::before,
 #pauseButton:hover::before,
-#replayButton:hover::before {
+#replayButton:hover::before,
+#closeButton:hover::before {
   content: "";
   position: absolute;
   top: 0;
