@@ -475,7 +475,7 @@ function panMapToBottom(popup) {
   var newLatLng = map.containerPointToLatLng(point);
   
   map.panTo(newLatLng);
-//   overlay.style.display = 'none';
+  overlay.style.display = 'none';
 }
 
 map.on('popupopen', function(event) {
