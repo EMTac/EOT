@@ -463,6 +463,8 @@ var legendContainer2 = legend2.getContainer();
     }
 
 function panMapToBottom(popup) {
+  var overlay = document.getElementById("overlay")
+  overlay.style.display = 'block';
   var latLng = popup.getLatLng();
   
   var mapContainer = map.getContainer();
@@ -473,6 +475,7 @@ function panMapToBottom(popup) {
   var newLatLng = map.containerPointToLatLng(point);
   
   map.panTo(newLatLng);
+  overlay.style.display = 'none';
 }
 
 map.on('popupopen', function(event) {
