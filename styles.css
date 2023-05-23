@@ -533,3 +533,7 @@ html, body {
 .custom-popup img {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
+.custom-popup img.touch-hover {
+  background-color: rgb(70, 70, 70);
+}
