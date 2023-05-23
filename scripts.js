@@ -167,7 +167,7 @@ var originalMarkers = L.markerClusterGroup({
     if (img === "") {
       popupContent = "<img src='noImg.png' width='80px' height='auto'><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
     } else {
-      popupContent = "<a href='" + img + "' target='_blank'><img src='" + img + "' width='505px' height='auto' onerror=\"this.src='noImg.png'; this.width=80\"></a><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
+      popupContent = "<img src='" + img + "' width='505px' height='auto' onerror=\"this.src='noImg.png'; this.width=80\"></a><br><br><a href='" + link + "' target='_blank' style='color: rgb(255, 158, 158)' title='View post on Reddit'><b>" + title + "</b></a><hr>Posted on: " + formattedDate + "<br><img src='customIcon2.png' width='30px' height='30px'> <b>" + formattedUpvote + "</b> upvotes";
     }
 
     marker.bindPopup(popupContent);
@@ -463,8 +463,6 @@ var legendContainer2 = legend2.getContainer();
     }
 
 function panMapToBottom(popup) {
-  var overlay = document.getElementById("overlay")
-  overlay.style.display = 'block';
   var latLng = popup.getLatLng();
   
   var mapContainer = map.getContainer();
@@ -475,7 +473,6 @@ function panMapToBottom(popup) {
   var newLatLng = map.containerPointToLatLng(point);
   
   map.panTo(newLatLng);
-  overlay.style.display = 'none';
 }
 
 map.on('popupopen', function(event) {
