@@ -486,7 +486,14 @@ map.on('popupopen', function(event) {
 
 var style = document.createElement('style');
 style.innerHTML = `
-.custom-popup img {
+.custom-popup img::selection,
+.custom-popup a::selection {
+  -webkit-tap-highlight-color: transparent;
+  background-color: transparent;
+}
+
+.custom-popup img,
+.custom-popup a {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
