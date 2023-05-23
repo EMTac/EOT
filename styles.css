@@ -518,5 +518,5 @@ html, body {
 
 .custom-popup img:hover {
   border: none;
-  opacity: 0;
+  opacity: 1;
 }
