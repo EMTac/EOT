@@ -483,3 +483,14 @@ map.on('popupopen', function(event) {
     L.DomEvent.stopPropagation(e);
   });
 });
+
+var hoverElements = document.querySelectorAll('.custom-popup img');
+hoverElements.forEach(function(element) {
+  element.addEventListener('touchstart', function() {
+    element.classList.add('touch-hover');
+  });
+
+  element.addEventListener('touchend', function() {
+    element.classList.remove('touch-hover');
+  });
+});
