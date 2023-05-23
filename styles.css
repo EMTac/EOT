@@ -1,4 +1,4 @@
-@media (hover: hover) {
+@media (hover: hover) and (pointer:fine) {
   button:hover {
       background-color: rgb(70, 70, 70);
   }
@@ -355,7 +355,7 @@ html, body {
   z-index: 1000;
 }
 
-#showAllPostsButton:hover::before {
+/* #showAllPostsButton:hover::before {
   content: "";
   position: absolute;
   top: 0;
@@ -364,7 +364,7 @@ html, body {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 1;
-}
+} */
 
 #collapseButton {
   background-color:rgb(161, 21, 21);
@@ -382,7 +382,7 @@ html, body {
   transform: rotate(270deg);
 }
 
-#collapseButton:hover::before {
+/* #collapseButton:hover::before {
   content: "";
   position: absolute;
   top: 0;
@@ -391,7 +391,7 @@ html, body {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 1;
-}
+} */
 
 #selectedTimeBox {
   background-color:#111111be;
@@ -445,7 +445,7 @@ html, body {
   display: none;
 }
 
-#playButton:hover::before,
+/* #playButton:hover::before,
 #pauseButton:hover::before,
 #replayButton:hover::before,
 #closeButton:hover::before {
@@ -458,7 +458,7 @@ html, body {
   background-color: rgba(255, 255, 255, 0.5);
   z-index: -1;
   border-radius: 50%;
-}
+} */
 
 #replayButton {
   right: 15px;
@@ -522,18 +522,18 @@ html, body {
   user-select: none;
 }
 
-.custom-popup:hover,
+/* .custom-popup:hover,
 .leaflet-popup-content:hover,
 .custom-popup img:hover,
 .custom-popup a:hover {
   border: none;
   opacity: 1 !important;
-}
+} */
 
 .custom-popup img {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.custom-popup img.touch-hover {
+/* .custom-popup img.touch-hover {
   background-color: rgb(70, 70, 70);
-}
+} */
