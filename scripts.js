@@ -483,3 +483,9 @@ map.on('popupopen', function(event) {
     L.DomEvent.stopPropagation(e);
   });
 });
+
+var element = document.querySelector('.custom-popup img');
+
+element.addEventListener('click', function() {
+  element.blur();
+});
