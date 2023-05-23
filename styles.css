@@ -527,14 +527,3 @@ html, body {
 .custom-popup img {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999999;
-  background-color: transparent;
-  display: none;
-}
