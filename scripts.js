@@ -487,7 +487,7 @@ map.on('popupopen', function(event) {
 var style = document.createElement('style');
 style.innerHTML = `
 .custom-popup,
-.custom-popup-content,
+.leaflet-popup-content,
 .custom-popup img::selection,
 .custom-popup a::selection {
   -webkit-tap-highlight-color: transparent;
@@ -495,7 +495,7 @@ style.innerHTML = `
 }
 
 .custom-popup,
-.custom-popup-content,
+.leaflet-popup-content,
 .custom-popup img,
 .custom-popup a {
   -webkit-touch-callout: none;
