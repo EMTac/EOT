@@ -516,7 +516,10 @@ html, body {
   user-select: none;
 }
 
-.custom-popup img:hover {
+.custom-popup:hover,
+.leaflet-popup-content:hover,
+.custom-popup img:hover,
+.custom-popup a:hover {
   border: none;
   opacity: 1 !important;
 }
