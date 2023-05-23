@@ -1,3 +1,9 @@
+@media (hover: hover) {
+  button:hover {
+      background-color: rgb(70, 70, 70);
+  }
+}
+
 @media only screen and (max-width: 1080px) {
   #collapseButton {
     width:50px;
@@ -525,5 +531,5 @@ html, body {
 }
 
 .custom-popup img {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* Set tap highlight color to transparent */
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
