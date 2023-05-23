@@ -515,3 +515,8 @@ html, body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.custom-popup img:hover {
+  border: none;
+  opacity: 0;
+}
